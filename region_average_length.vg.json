@@ -1,0 +1,115 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 620,
+  "height": 360,
+
+  "title": {
+    "text": "Southern Ranges Has the Longest Track Sections on Average",
+    "subtitle": "Average walking and hiking track-section length by NSW NPWS region",
+    "anchor": "middle",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 12
+  },
+
+  "data": {
+    "url": "data/nsw_walking_tracks_clean.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.region != null && datum.region != '' && datum.region != 'Unknown' && datum.length_km > 0"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "length_km",
+          "as": "avg_length_km"
+        },
+        {
+          "op": "count",
+          "as": "track_count"
+        }
+      ],
+      "groupby": [
+        "region"
+      ]
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+
+  "encoding": {
+    "y": {
+      "field": "region",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 180
+      }
+    },
+
+    "x": {
+      "field": "avg_length_km",
+      "type": "quantitative",
+      "title": "Average Track Section Length (km)",
+      "axis": {
+        "grid": true,
+        "gridColor": "#e6e6e6",
+        "format": ".2f"
+      }
+    },
+
+    "color": {
+      "field": "avg_length_km",
+      "type": "quantitative",
+      "legend": null,
+      "scale": {
+        "scheme": "greens"
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "region",
+        "type": "nominal",
+        "title": "Region"
+      },
+      {
+        "field": "avg_length_km",
+        "type": "quantitative",
+        "title": "Average Length (km)",
+        "format": ".2f"
+      },
+      {
+        "field": "track_count",
+        "type": "quantitative",
+        "title": "Track Sections"
+      }
+    ]
+  },
+
+  "config": {
+    "background": "white",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Georgia"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "titleFontSize": 12
+    }
+  }
+}

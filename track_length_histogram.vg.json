@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 620,
+  "height": 340,
+
+  "title": {
+    "text": "Most NSW Walking-Track Sections Are Relatively Short",
+    "subtitle": "Distribution of walking and hiking track-section lengths",
+    "anchor": "middle",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 12
+  },
+
+  "data": {
+    "url": "data/nsw_walking_tracks_clean.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.length_km > 0 && datum.length_km <= 10"
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "cornerRadiusTopLeft": 2,
+    "cornerRadiusTopRight": 2
+  },
+
+  "encoding": {
+    "x": {
+      "field": "length_km",
+      "type": "quantitative",
+      "bin": {
+        "step": 0.5
+      },
+      "title": "Track Section Length (km)",
+      "axis": {
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Track Sections",
+      "axis": {
+        "grid": true,
+        "gridColor": "#e6e6e6",
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "color": {
+      "value": "#6baed6"
+    },
+
+    "tooltip": [
+      {
+        "field": "length_km",
+        "type": "quantitative",
+        "bin": {
+          "step": 0.5
+        },
+        "title": "Length Range (km)"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Track Sections"
+      }
+    ]
+  },
+
+  "config": {
+    "background": "white",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Georgia"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

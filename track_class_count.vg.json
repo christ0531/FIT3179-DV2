@@ -1,0 +1,126 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 620,
+  "height": 320,
+
+  "title": {
+    "text": "Class 3 Walking Tracks Are the Most Common in NSW",
+    "subtitle": "Number of walking and hiking track sections by track class",
+    "anchor": "middle",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 12
+  },
+
+  "data": {
+    "url": "data/nsw_walking_tracks_clean.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.track_class != null && datum.track_class != '' && datum.track_class != 'Unknown' && datum.track_class != 'Not Applicable'"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "track_count"
+        }
+      ],
+      "groupby": [
+        "track_class"
+      ]
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+
+  "encoding": {
+    "y": {
+      "field": "track_class",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Class 1 All Access Track",
+        "Class 2 Graded Track",
+        "Class 3 Walking Track",
+        "Class 4 Hiking Track",
+        "Class 5 Marked Route",
+        "Class 6 Unmarked Route"
+      ],
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 220
+      }
+    },
+
+    "x": {
+      "field": "track_count",
+      "type": "quantitative",
+      "title": "Number of Track Sections",
+      "axis": {
+        "grid": true,
+        "gridColor": "#e6e6e6",
+        "tickMinStep": 1
+      }
+    },
+
+    "color": {
+      "field": "track_class",
+      "type": "ordinal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Class 1 All Access Track",
+          "Class 2 Graded Track",
+          "Class 3 Walking Track",
+          "Class 4 Hiking Track",
+          "Class 5 Marked Route",
+          "Class 6 Unmarked Route"
+        ],
+        "range": [
+          "#f2f0f7",
+          "#dadaeb",
+          "#bcbddc",
+          "#9e9ac8",
+          "#756bb1",
+          "#54278f"
+        ]
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "track_class",
+        "type": "nominal",
+        "title": "Track Class"
+      },
+      {
+        "field": "track_count",
+        "type": "quantitative",
+        "title": "Track Sections"
+      }
+    ]
+  },
+
+  "config": {
+    "background": "white",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Georgia"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "titleFontSize": 12
+    }
+  }
+}

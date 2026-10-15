@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Walking Trails in Australia</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+</head>
+
+
+<body>
+
+  <!-- =========================
+       HERO
+       ========================= -->
+
+  <header class="hero">
+
+    <nav class="top-nav">
+
+      <div class="brand">
+        WALKING TRAILS
+      </div>
+
+      <a href="#story">
+        Explore the story ↓
+      </a>
+
+    </nav>
+
+
+    <div class="hero-inner">
+
+      <p class="kicker">
+        FIT3179 · DATA VISUALISATION 2
+      </p>
+
+      <h1>
+        Walking trails
+        <span>tell different stories.</span>
+      </h1>
+
+      <p class="hero-intro">
+        Trail networks differ in where they are located,
+        how difficult they are and how far they extend.
+        This visualisation explores regional walking-track
+        patterns in New South Wales before taking a
+        closer look at individual routes in Hobart.
+      </p>
+
+
+      <div class="hero-stats">
+
+        <div class="stat">
+
+          <span class="stat-number">
+            5,087
+          </span>
+
+          <span class="stat-text">
+            NSW walking and hiking
+            track sections analysed
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="stat-number">
+            738.81 km
+          </span>
+
+          <span class="stat-text">
+            total track length
+            in South Coast
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="stat-number">
+            8
+          </span>
+
+          <span class="stat-text">
+            NSW NPWS regions
+            compared
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <p class="hero-source">
+        Sources: NSW NPWS, City of Hobart and ABS.
+        Data cleaned and transformed for visualisation.
+      </p>
+
+    </div>
+
+  </header>
+
+
+
+  <main id="story">
+
+
+    <!-- =========================================
+         SECTION 00
+         AUSTRALIA OVERVIEW
+         ========================================= -->
+
+    <section class="story-section">
+
+      <div class="chapter-header">
+
+        <div class="chapter-number">
+          00
+        </div>
+
+        <div>
+
+          <p class="chapter-label">
+            STUDY AREAS
+          </p>
+
+          <h2>
+            From Australia to
+            NSW and Hobart.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Two study areas provide
+            different levels of detail.
+          </h3>
+
+          <p>
+            New South Wales supports regional analysis
+            of walking-track distribution, length and
+            classification. Hobart, in Tasmania, provides
+            a more detailed local view of individual
+            trail routes and walking grades.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            00 / AUSTRALIA OVERVIEW
+          </div>
+
+          <h4>
+            Study areas within Australia
+          </h4>
+
+          <p class="chart-subtitle">
+            NSW and TAS are highlighted.
+          </p>
+
+          <div
+            class="chart"
+            id="map0"
+          ></div>
+
+          <p class="chart-note">
+            NSW is used for regional trail analysis,
+            while Hobart in Tasmania is used as
+            the local route case study.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SECTION 01
+         SPATIAL PICTURE
+         ========================================= -->
+
+    <section class="story-section alternate">
+
+      <div class="chapter-header">
+
+        <div class="chapter-number">
+          01
+        </div>
+
+        <div>
+
+          <p class="chapter-label">
+            THE SPATIAL PICTURE
+          </p>
+
+          <h2>
+            Trails cluster around
+            people and recreation areas.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CHART 01 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            NSW's walking network is
+            concentrated along the east.
+          </h3>
+
+          <p>
+            Walking-track sections are not distributed
+            evenly across New South Wales.
+            Dense clusters appear along the coast,
+            particularly near major population
+            and recreation areas.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            01 / PROPORTIONAL SYMBOL MAP
+          </div>
+
+          <h4>
+            Walking tracks across New South Wales
+          </h4>
+
+          <p class="chart-subtitle">
+            Circle size represents track-section length.
+            Colour represents track class.
+          </p>
+
+          <div
+            class="chart"
+            id="map2"
+          ></div>
+
+          <p class="chart-note">
+            Source: NSW National Parks and Wildlife Service,
+            Track Section dataset, 2026.
+          </p>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CHART 02 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Greater Sydney forms
+            the strongest hotspot.
+          </h3>
+
+          <p>
+            Aggregating nearby track sections reveals
+            where the network is most concentrated.
+            The strongest clusters appear around
+            Greater Sydney and continue along
+            the eastern coastline.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            02 / HOTSPOT MAP
+          </div>
+
+          <h4>
+            Where are walking tracks most concentrated?
+          </h4>
+
+          <p class="chart-subtitle">
+            Larger and darker circles indicate
+            more track sections within each grid cell.
+          </p>
+
+          <div
+            class="chart"
+            id="map4"
+          ></div>
+
+          <p class="chart-note">
+            Grid cells aggregate representative points
+            derived from NSW NPWS track sections.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SECTION 02
+         REGIONAL DIFFERENCES
+         ========================================= -->
+
+    <section class="story-section">
+
+      <div class="chapter-header">
+
+        <div class="chapter-number">
+          02
+        </div>
+
+        <div>
+
+          <p class="chapter-label">
+            REGIONAL DIFFERENCES
+          </p>
+
+          <h2>
+            More tracks does not always mean
+            more kilometres.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CHART 03 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            South Coast has the
+            greatest total trail length.
+          </h3>
+
+          <p>
+            Regional totals show substantial differences
+            in the scale of the walking network.
+            South Coast contains approximately
+            738.81 kilometres of mapped track sections.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            03 / CHOROPLETH MAP
+          </div>
+
+          <h4>
+            Total walking-track length by NPWS region
+          </h4>
+
+          <p class="chart-subtitle">
+            Darker regions contain greater
+            total mapped track length.
+          </p>
+
+          <div
+            class="chart"
+            id="map3"
+          ></div>
+
+          <p class="chart-note">
+            Source: NSW NPWS Track Section
+            and NPWS Branches datasets.
+          </p>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CHART 04 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Total distance tells one story.
+          </h3>
+
+          <p>
+            South Coast leads in total mapped
+            walking-track kilometres,
+            followed by Blue Mountains
+            and North Coast.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            04 / RANKED BAR CHART
+          </div>
+
+          <h4>
+            Total walking-track length by region
+          </h4>
+
+          <div
+            class="chart"
+            id="chart6"
+          ></div>
+
+          <p class="chart-note">
+            Unknown-region records are excluded.
+          </p>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CHART 05 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Track count tells another.
+          </h3>
+
+          <p>
+            Hunter Central Coast contains the
+            greatest number of individual sections,
+            even though South Coast has
+            considerably more total track length.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            05 / RANKED BAR CHART
+          </div>
+
+          <h4>
+            Number of track sections by region
+          </h4>
+
+          <div
+            class="chart"
+            id="chart7"
+          ></div>
+
+          <p class="chart-note">
+            A track section is one spatial segment
+            in the NSW NPWS source dataset.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <div class="takeaway-strip">
+
+        <span>
+          KEY INSIGHT
+        </span>
+
+        <p>
+          Hunter Central Coast has the most sections,
+          while South Coast has the greatest total distance.
+          Counting tracks and measuring their length
+          answer different questions.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SECTION 03
+         TRAIL CHARACTERISTICS
+         ========================================= -->
+
+    <section class="story-section alternate">
+
+      <div class="chapter-header">
+
+        <div class="chapter-number">
+          03
+        </div>
+
+        <div>
+
+          <p class="chapter-label">
+            TRAIL CHARACTERISTICS
+          </p>
+
+          <h2>
+            Most mapped routes fall
+            in the middle classifications.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CHART 06 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Class 3 dominates the network.
+          </h3>
+
+          <p>
+            Class 3 Walking Track is substantially
+            more common than the other
+            walking classifications represented
+            in the dataset.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            06 / CLASS PROFILE
+          </div>
+
+          <h4>
+            Number of track sections by class
+          </h4>
+
+          <div
+            class="chart"
+            id="chart5"
+          ></div>
+
+          <p class="chart-note">
+            Unknown and Not Applicable
+            classifications are excluded.
+          </p>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CHART 07 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Walking Track is the
+            dominant infrastructure type.
+          </h3>
+
+          <p>
+            Walking Track records greatly outnumber
+            Walking Routes and Specified Use Tracks
+            within the cleaned NSW dataset.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            07 / TRACK TYPE
+          </div>
+
+          <h4>
+            Track sections by infrastructure type
+          </h4>
+
+          <div
+            class="chart"
+            id="chart10"
+          ></div>
+
+          <p class="chart-note">
+            Only walking and hiking-related
+            track types retained during preprocessing.
+          </p>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CHART 08 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Higher classes show
+            greater variation in length.
+          </h3>
+
+          <p>
+            Track-section lengths become more variable
+            among higher classes.
+            Classes 5 and 6 contain some of the
+            longest sections in the distribution.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            08 / BOX PLOT
+          </div>
+
+          <h4>
+            Track length across walking classes
+          </h4>
+
+          <div
+            class="chart"
+            id="chart9"
+          ></div>
+
+          <p class="chart-note">
+            Display limited to sections up to 10 km
+            so the central distributions remain readable.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SECTION 04
+         TRACK LENGTH
+         ========================================= -->
+
+    <section class="story-section">
+
+      <div class="chapter-header">
+
+        <div class="chapter-number">
+          04
+        </div>
+
+        <div>
+
+          <p class="chapter-label">
+            HOW LONG ARE THE TRAILS?
+          </p>
+
+          <h2>
+            Long regional networks are built
+            from many short sections.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CHART 09 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Most individual sections
+            are under half a kilometre.
+          </h3>
+
+          <p>
+            The distribution is strongly right-skewed.
+            Short segments are extremely common,
+            while progressively fewer sections
+            extend across several kilometres.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            09 / HISTOGRAM
+          </div>
+
+          <h4>
+            Distribution of track-section length
+          </h4>
+
+          <div
+            class="chart"
+            id="chart8"
+          ></div>
+
+          <p class="chart-note">
+            Display range limited to 0–10 km.
+          </p>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CHART 10 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Southern Ranges has
+            longer sections on average.
+          </h3>
+
+          <p>
+            Southern Ranges stands above the
+            other NSW regions in average
+            track-section length,
+            despite having relatively few sections.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            10 / AVERAGE LENGTH
+          </div>
+
+          <h4>
+            Average track-section length by region
+          </h4>
+
+          <div
+            class="chart"
+            id="chart11"
+          ></div>
+
+          <p class="chart-note">
+            Average calculated from positive-length
+            walking and hiking track records.
+          </p>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- CHART 11 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Quantity and distance
+            are related — but imperfectly.
+          </h3>
+
+          <p>
+            Regions with many track sections often
+            have larger overall networks,
+            but important exceptions remain.
+            Hunter Central Coast has many sections
+            without matching South Coast's total distance.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            11 / SCATTER PLOT
+          </div>
+
+          <h4>
+            Track count versus total track length
+          </h4>
+
+          <div
+            class="chart"
+            id="chart12"
+          ></div>
+
+          <p class="chart-note">
+            Each point represents one NSW NPWS region.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SECTION 05
+         HOBART
+         ========================================= -->
+
+    <section class="story-section hobart-section">
+
+      <div class="chapter-header">
+
+        <div class="chapter-number">
+          05
+        </div>
+
+        <div>
+
+          <p class="chapter-label">
+            A LOCAL CASE STUDY
+          </p>
+
+          <h2>
+            Zooming in reveals
+            the routes themselves.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CHART 12 -->
+
+      <article class="visual-story">
+
+        <div class="story-copy">
+
+          <h3>
+            Hobart provides a
+            trail-by-trail view.
+          </h3>
+
+          <p>
+            Unlike the aggregated NSW views,
+            the Hobart dataset preserves individual
+            route geometry.
+            Walking grades reveal how difficulty
+            changes throughout the local network.
+          </p>
+
+        </div>
+
+
+        <div class="visual-card">
+
+          <div class="visual-label">
+            12 / ROUTE MAP
+          </div>
+
+          <h4>
+            Hobart walking trails by difficulty
+          </h4>
+
+          <p class="chart-subtitle">
+            Grade 1 represents easier walking;
+            Grade 5 represents the hardest routes.
+          </p>
+
+          <div
+            class="chart"
+            id="map1"
+          ></div>
+
+          <p class="chart-note">
+            Source: City of Hobart,
+            Recreational Tracks and Trails Open Data, 2026.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FINAL TAKEAWAY
+         ========================================= -->
+
+    <section class="final-takeaway">
+
+      <p class="chapter-label">
+        THE TAKEAWAY
+      </p>
+
+      <h2>
+        One trail network.
+        <span>Many different patterns.</span>
+      </h2>
+
+      <p>
+        Walking trails cannot be understood through
+        a single measure.
+        Location reveals concentration,
+        classifications describe difficulty,
+        and track length shows the scale of
+        regional networks.
+      </p>
+
+      <p>
+        NSW demonstrates strong regional differences,
+        while the Hobart case study shows how those
+        broader patterns translate into individual routes.
+      </p>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SOURCES
+         ========================================= -->
+
+    <footer class="sources">
+
+      <p class="chapter-label">
+        SOURCES & READING NOTES
+      </p>
+
+      <h2>
+        Data sources
+      </h2>
+
+
+      <div class="source-grid">
+
+        <div>
+
+          <h3>
+            NSW trail data
+          </h3>
+
+          <p>
+            NSW National Parks and Wildlife Service —
+            Track Section dataset, 2026.
+          </p>
+
+          <p>
+            NSW National Parks and Wildlife Service —
+            NPWS Branches dataset.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <h3>
+            Spatial context
+          </h3>
+
+          <p>
+            Australian Bureau of Statistics —
+            States and Territories,
+            ASGS Edition 4, 2026.
+          </p>
+
+          <p>
+            Natural Earth —
+            administrative boundaries.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <h3>
+            Hobart case study
+          </h3>
+
+          <p>
+            City of Hobart —
+            Recreational Tracks and Trails Open Data,
+            2026.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="method-note">
+
+        <h3>
+          Why & Who
+        </h3>
+
+        <p>
+          This visualisation helps general readers
+          and outdoor recreation users understand
+          how walking trails vary by location,
+          scale and difficulty.
+        </p>
+
+
+        <h3>
+          What
+        </h3>
+
+        <p>
+          The project uses NSW walking-track,
+          NPWS branch, Australian state boundary
+          and Hobart recreational trail datasets.
+        </p>
+
+
+        <h3>
+          How
+        </h3>
+
+        <p>
+          Route maps show individual trails,
+          proportional-symbol and hotspot maps
+          show spatial distribution,
+          choropleth maps compare regions,
+          and statistical charts compare
+          track count, class and length.
+        </p>
+
+      </div>
+
+
+      <div class="footer-line">
+
+        <span>
+          Built by Christina Ting Sing Hui
+        </span>
+
+        <span>
+          FIT3179 · 2026
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+
+
+  <!-- =========================================
+       VEGA THEME + EMBEDDING
+       ========================================= -->
+
+  <script>
+
+    const TRAIL_THEME = {
+
+      dark: "#123f37",
+
+      main: "#357b6b",
+
+      medium: "#70aa99",
+
+      light: "#b9d8cf",
+
+      pale: "#e9f3ef",
+
+      gold: "#c49a4a",
+
+      ordered: [
+        "#e9f3ef",
+        "#c7e0d8",
+        "#9bc8ba",
+        "#70aa99",
+        "#428879",
+        "#175f52"
+      ],
+
+      categorical: [
+        "#175f52",
+        "#357b6b",
+        "#70aa99",
+        "#9bc8ba",
+        "#315f78",
+        "#668ca0",
+        "#c49a4a",
+        "#8b6b48"
+      ],
+
+      quantitative: [
+        "#e9f3ef",
+        "#b9d8cf",
+        "#70aa99",
+        "#357b6b",
+        "#123f37"
+      ]
+    };
+
+
+
+    function applyTrailTheme(spec) {
+
+      /*
+        Remove internal Vega titles because
+        webpage headings are used instead.
+      */
+
+      delete spec.title;
+
+
+      /*
+        Make chart responsive.
+      */
+
+      spec.width = "container";
+
+      spec.autosize = {
+        type: "fit",
+        contains: "padding"
+      };
+
+
+      /*
+        Shared chart configuration.
+      */
+
+      spec.config = {
+        ...(spec.config || {}),
+
+        background: null,
+
+        view: {
+          ...((spec.config || {}).view || {}),
+          stroke: null
+        },
+
+        axis: {
+          ...((spec.config || {}).axis || {}),
+
+          labelFont: "Arial",
+          titleFont: "Arial",
+
+          labelColor: "#45534d",
+          titleColor: "#263b33",
+
+          domainColor: "#aebbb5",
+          tickColor: "#aebbb5",
+
+          gridColor: "#e6ece9",
+          gridOpacity: 1
+        },
+
+        legend: {
+          ...((spec.config || {}).legend || {}),
+
+          labelFont: "Arial",
+          titleFont: "Arial",
+
+          labelColor: "#45534d",
+          titleColor: "#263b33"
+        }
+      };
+
+
+
+      function recolour(node) {
+
+        if (
+          !node ||
+          typeof node !== "object"
+        ) {
+          return;
+        }
+
+
+        if (node.encoding) {
+
+          ["color", "stroke", "fill"].forEach(
+            channel => {
+
+              const encoding =
+                node.encoding[channel];
+
+
+              if (
+                !encoding ||
+                typeof encoding !== "object"
+              ) {
+                return;
+              }
+
+
+              /*
+                Fixed colours
+              */
+
+              if (
+                Object.prototype.hasOwnProperty.call(
+                  encoding,
+                  "value"
+                )
+              ) {
+
+                encoding.value =
+                  TRAIL_THEME.main;
+
+              }
+
+
+              /*
+                Data-driven colours
+              */
+
+              if (encoding.field) {
+
+                const field =
+                  String(
+                    encoding.field
+                  ).toLowerCase();
+
+
+                /*
+                  Quantitative
+                */
+
+                if (
+                  encoding.type === "quantitative"
+                ) {
+
+                  encoding.scale = {
+                    ...(encoding.scale || {}),
+
+                    range:
+                      TRAIL_THEME.quantitative
+                  };
+
+                  delete encoding.scale.scheme;
+
+                }
+
+
+                /*
+                  Difficulty / class / grade
+                */
+
+                else if (
+                  encoding.type === "ordinal" ||
+                  field.includes("class") ||
+                  field.includes("grade")
+                ) {
+
+                  encoding.scale = {
+                    ...(encoding.scale || {}),
+
+                    range:
+                      TRAIL_THEME.ordered
+                  };
+
+                }
+
+
+                /*
+                  Nominal categories
+                */
+
+                else {
+
+                  encoding.scale = {
+                    ...(encoding.scale || {}),
+
+                    range:
+                      TRAIL_THEME.categorical
+                  };
+
+                }
+
+              }
+
+            }
+          );
+
+        }
+
+
+        Object.values(node).forEach(
+          value => {
+
+            if (
+              value &&
+              typeof value === "object"
+            ) {
+
+              recolour(value);
+
+            }
+
+          }
+        );
+
+      }
+
+
+      recolour(spec);
+
+      return spec;
+
+    }
+
+
+
+    const embedOptions = {
+
+      actions: false,
+
+      renderer: "svg"
+
+    };
+
+
+
+    async function embedTrailChart(
+      selector,
+      file
+    ) {
+
+      try {
+
+        const response =
+          await fetch(file);
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            `Unable to load ${file}`
+          );
+
+        }
+
+
+        const spec =
+          await response.json();
+
+
+        applyTrailTheme(spec);
+
+
+        await vegaEmbed(
+          selector,
+          spec,
+          embedOptions
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+
+        const target =
+          document.querySelector(
+            selector
+          );
+
+
+        if (target) {
+
+          target.innerHTML =
+            "<p class='chart-error'>Chart could not be loaded.</p>";
+
+        }
+
+      }
+
+    }
+
+
+
+    /*
+      MAPS
+    */
+
+    embedTrailChart(
+      "#map0",
+      "australia_overview_map.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#map1",
+      "hobart_trails_map.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#map2",
+      "nsw_tracks_map.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#map3",
+      "nsw_region_choropleth.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#map4",
+      "nsw_trail_hotspots_map.vg.json"
+    );
+
+
+
+    /*
+      OTHER CHARTS
+    */
+
+    embedTrailChart(
+      "#chart5",
+      "track_class_count.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#chart6",
+      "region_total_length.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#chart7",
+      "region_track_count.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#chart8",
+      "track_length_histogram.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#chart9",
+      "track_length_by_class.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#chart10",
+      "track_type_count.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#chart11",
+      "region_average_length.vg.json"
+    );
+
+
+    embedTrailChart(
+      "#chart12",
+      "region_count_vs_length.vg.json"
+    );
+
+  </script>
+
+</body>
+
+</html>

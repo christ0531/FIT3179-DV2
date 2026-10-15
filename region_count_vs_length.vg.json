@@ -1,0 +1,127 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 620,
+  "height": 380,
+
+  "title": {
+    "text": "Regions With More Track Sections Usually Have Greater Total Track Length",
+    "subtitle": "Each point represents one NSW NPWS region",
+    "anchor": "middle",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 12
+  },
+
+  "data": {
+    "url": "data/nsw_region_trail_totals.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.region != 'Unknown'"
+    }
+  ],
+
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 150,
+        "opacity": 0.8
+      },
+
+      "encoding": {
+        "x": {
+          "field": "track_count",
+          "type": "quantitative",
+          "title": "Number of Track Sections",
+          "axis": {
+            "grid": true,
+            "gridColor": "#e6e6e6"
+          }
+        },
+
+        "y": {
+          "field": "total_length_km",
+          "type": "quantitative",
+          "title": "Total Track Length (km)",
+          "axis": {
+            "grid": true,
+            "gridColor": "#e6e6e6"
+          }
+        },
+
+        "color": {
+          "field": "region",
+          "type": "nominal",
+          "legend": null
+        },
+
+        "tooltip": [
+          {
+            "field": "region",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "track_count",
+            "type": "quantitative",
+            "title": "Track Sections"
+          },
+          {
+            "field": "total_length_km",
+            "type": "quantitative",
+            "title": "Total Length (km)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 7,
+        "dy": -6,
+        "font": "Arial",
+        "fontSize": 11
+      },
+
+      "encoding": {
+        "x": {
+          "field": "track_count",
+          "type": "quantitative"
+        },
+
+        "y": {
+          "field": "total_length_km",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "region"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "background": "white",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Georgia"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "titleFontSize": 12
+    }
+  }
+}

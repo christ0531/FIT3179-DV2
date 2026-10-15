@@ -1,0 +1,103 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 650,
+  "height": 560,
+
+  "title": {
+    "text": "South Coast Has the Greatest Total Walking-Track Length",
+    "subtitle": "Total walking and hiking track length by NSW NPWS branch",
+    "anchor": "middle",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 12
+  },
+
+  "data": {
+    "url": "data/nsw_npws_branches.json",
+    "format": {
+      "type": "topojson",
+      "feature": "branches"
+    }
+  },
+
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "data/nsw_region_trail_totals.csv"
+        },
+        "key": "region",
+        "fields": [
+          "total_length_km",
+          "track_count"
+        ]
+      }
+    },
+    {
+      "filter": "datum.total_length_km != null"
+    }
+  ],
+
+  "projection": {
+    "type": "mercator"
+  },
+
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1.2
+  },
+
+  "encoding": {
+    "color": {
+      "field": "total_length_km",
+      "type": "quantitative",
+      "title": "Total Track Length (km)",
+      "scale": {
+        "scheme": "blues"
+      },
+      "legend": {
+        "orient": "right",
+        "titleFontSize": 12,
+        "labelFontSize": 11
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "properties.NAME",
+        "type": "nominal",
+        "title": "NPWS Branch"
+      },
+      {
+        "field": "total_length_km",
+        "type": "quantitative",
+        "title": "Total Length (km)",
+        "format": ".2f"
+      },
+      {
+        "field": "track_count",
+        "type": "quantitative",
+        "title": "Track Sections"
+      }
+    ]
+  },
+
+  "config": {
+    "background": "white",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Georgia"
+    },
+
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

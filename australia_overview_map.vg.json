@@ -1,0 +1,135 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 650,
+  "height": 500,
+
+  "title": {
+    "text": "Where Are the Detailed Trail Studies Located?",
+    "subtitle": "NSW and TAS are highlighted within Australia",
+    "anchor": "middle",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 12
+  },
+
+  "projection": {
+    "type": "mercator"
+  },
+
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_states.json",
+        "format": {
+          "type": "topojson",
+          "feature": "STE_2026_AUST_GDA2020"
+        }
+      },
+
+      "transform": [
+        {
+          "calculate": "datum.properties.STE_NAME26 == 'New South Wales' || datum.properties.STE_NAME26 == 'Tasmania' ? 'Study Area' : 'Other States'",
+          "as": "study_area"
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+
+      "encoding": {
+        "color": {
+          "field": "study_area",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Study Area",
+              "Other States"
+            ],
+            "range": [
+              "#357b6b",
+              "#dfe7e3"
+            ]
+          },
+          "legend": {
+            "orient": "right"
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "properties.STE_NAME26",
+            "type": "nominal",
+            "title": "State / Territory"
+          },
+          {
+            "field": "study_area",
+            "type": "nominal",
+            "title": "Role"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "label": "NSW",
+            "longitude": 147.2,
+            "latitude": -32.5
+          },
+          {
+            "label": "TAS",
+            "longitude": 146.6,
+            "latitude": -42.0
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "white"
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "background": "white",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Georgia"
+    },
+
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

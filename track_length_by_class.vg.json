@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 620,
+  "height": 360,
+
+  "title": {
+    "text": "Track Length Varies Across NSW Walking-Track Classes",
+    "subtitle": "Distribution of track-section length by track class",
+    "anchor": "middle",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 12
+  },
+
+  "data": {
+    "url": "data/nsw_walking_tracks_clean.csv"
+  },
+
+  "transform": [
+    {
+      "filter": "datum.length_km > 0 && datum.length_km <= 10"
+    },
+    {
+      "filter": "datum.track_class != null && datum.track_class != '' && datum.track_class != 'Unknown' && datum.track_class != 'Not Applicable'"
+    }
+  ],
+
+  "mark": {
+    "type": "boxplot",
+    "extent": "min-max",
+    "size": 40
+  },
+
+  "encoding": {
+    "x": {
+      "field": "track_class",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Class 1 All Access Track",
+        "Class 2 Graded Track",
+        "Class 3 Walking Track",
+        "Class 4 Hiking Track",
+        "Class 5 Marked Route",
+        "Class 6 Unmarked Route"
+      ],
+      "axis": {
+        "labelAngle": -30,
+        "labelFontSize": 11,
+        "labelLimit": 160
+      }
+    },
+
+    "y": {
+      "field": "length_km",
+      "type": "quantitative",
+      "title": "Track Section Length (km)",
+      "axis": {
+        "grid": true,
+        "gridColor": "#e6e6e6",
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "color": {
+      "field": "track_class",
+      "type": "ordinal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Class 1 All Access Track",
+          "Class 2 Graded Track",
+          "Class 3 Walking Track",
+          "Class 4 Hiking Track",
+          "Class 5 Marked Route",
+          "Class 6 Unmarked Route"
+        ],
+        "range": [
+          "#f2f0f7",
+          "#dadaeb",
+          "#bcbddc",
+          "#9e9ac8",
+          "#756bb1",
+          "#54278f"
+        ]
+      }
+    }
+  },
+
+  "config": {
+    "background": "white",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Georgia"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}
