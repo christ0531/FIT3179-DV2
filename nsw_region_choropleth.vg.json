@@ -40,7 +40,7 @@
     "color": {
       "field": "properties.track_density",
       "type": "quantitative",
-      "title": "Total Density (km per 1,000 km²)",
+      "title": "Track Density (km per 1,000 km²)",
       "scale": {
         "scheme": "blues"
       },
@@ -70,15 +70,15 @@
         "format": ".2f"
       },
       {
-        "field": "properties.total_count",
+        "field": "properties.track_count",
         "type": "quantitative",
-        "title": "Total Sections"
+        "title": "Track Sections"
       },
       {
         "field": "properties.area_km2",
         "type": "quantitative",
         "title": "Region Area (km²)",
-        "format": ".0f"
+        "format": ",.0f"
       }
     ]
   },
