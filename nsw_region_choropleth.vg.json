@@ -4,8 +4,8 @@
   "height": 560,
 
   "title": {
-    "text": "South Coast Has the Greatest Total Walking-Track Length",
-    "subtitle": "Total walking and hiking track length by NSW NPWS branch",
+    "text": "Walking-Track Density Varies Across NSW Regions",
+    "subtitle": "Kilometres of walking and hiking tracks per 1,000 km² of region area",
     "anchor": "middle",
     "fontSize": 18,
     "subtitleFontSize": 13,
@@ -13,7 +13,7 @@
   },
 
   "data": {
-    "url": "data/nsw_npws_branches.json",
+    "url": "data/nsw_npws_branches_density.json",
     "format": {
       "type": "topojson",
       "feature": "branches"
@@ -22,20 +22,7 @@
 
   "transform": [
     {
-      "lookup": "properties.NAME",
-      "from": {
-        "data": {
-          "url": "data/nsw_region_trail_totals.csv"
-        },
-        "key": "region",
-        "fields": [
-          "total_length_km",
-          "track_count"
-        ]
-      }
-    },
-    {
-      "filter": "datum.total_length_km != null"
+      "filter": "datum.properties.track_density != null"
     }
   ],
 
@@ -51,9 +38,9 @@
 
   "encoding": {
     "color": {
-      "field": "total_length_km",
+      "field": "properties.track_density",
       "type": "quantitative",
-      "title": "Total Track Length (km)",
+      "title": "Total Density (km per 1,000 km²)",
       "scale": {
         "scheme": "blues"
       },
@@ -71,15 +58,27 @@
         "title": "NPWS Branch"
       },
       {
-        "field": "total_length_km",
+        "field": "properties.track_density",
+        "type": "quantitative",
+        "title": "Track Density",
+        "format": ".2f"
+      },
+      {
+        "field": "properties.total_length_km",
         "type": "quantitative",
         "title": "Total Length (km)",
         "format": ".2f"
       },
       {
-        "field": "track_count",
+        "field": "properties.total_count",
         "type": "quantitative",
-        "title": "Track Sections"
+        "title": "Total Sections"
+      },
+      {
+        "field": "properties.area_km2",
+        "type": "quantitative",
+        "title": "Region Area (km²)",
+        "format": ".0f"
       }
     ]
   },
