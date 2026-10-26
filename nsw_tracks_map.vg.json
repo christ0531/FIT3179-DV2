@@ -5,7 +5,7 @@
 
   "title": {
     "text": "NSW Walking Tracks Vary Widely in Length and Difficulty",
-    "subtitle": "Larger circles represent longer track sections",
+    "subtitle": "Larger circles represent longer track sections. Use the Track Class filter to inspect individual classes.",
     "anchor": "middle",
     "fontSize": 18,
     "subtitleFontSize": 13,
@@ -15,6 +15,26 @@
   "projection": {
     "type": "mercator"
   },
+
+  "params": [
+    {
+      "name": "classFilter",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "name": "Track Class: ",
+        "options": [
+          "All",
+          "Class 1 All Access Track",
+          "Class 2 Graded Track",
+          "Class 3 Walking Track",
+          "Class 4 Hiking Track",
+          "Class 5 Marked Route",
+          "Class 6 Unmarked Route"
+        ]
+      }
+    }
+  ],
 
   "layer": [
     {
@@ -47,15 +67,18 @@
 
       "transform": [
         {
-          "filter": "datum.length_km > 0"
+          "filter": "datum.length_km > 0 && datum.longitude != null && datum.latitude != null"
+        },
+        {
+          "filter": "classFilter == 'All' || datum.track_class == classFilter"
         }
       ],
 
       "mark": {
         "type": "circle",
-        "opacity": 0.6,
+        "opacity": 0.55,
         "stroke": "white",
-        "strokeWidth": 0.25
+        "strokeWidth": 0.35
       },
 
       "encoding": {
@@ -74,7 +97,7 @@
           "type": "quantitative",
           "title": "Track Length (km)",
           "scale": {
-            "range": [6, 180]
+            "range": [5, 120]
           },
           "legend": {
             "orient": "right",
@@ -87,7 +110,6 @@
           "field": "track_class",
           "type": "ordinal",
           "title": "Track Class",
-
           "scale": {
             "domain": [
               "Class 1 All Access Track",
@@ -97,17 +119,15 @@
               "Class 5 Marked Route",
               "Class 6 Unmarked Route"
             ],
-
             "range": [
-              "#f2f0f7",
-              "#dadaeb",
-              "#bcbddc",
-              "#9e9ac8",
-              "#756bb1",
-              "#54278f"
+              "#c6dbef",
+              "#9ecae1",
+              "#6baed6",
+              "#4292c6",
+              "#2171b5",
+              "#084594"
             ]
           },
-
           "legend": {
             "orient": "right",
             "titleFontSize": 12,
