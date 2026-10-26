@@ -15,7 +15,7 @@
   "projection": {
     "type": "mercator",
     "center": [147.25, -42.89],
-    "scale": 950000
+    "scale": 750000
   },
 
   "layer": [
