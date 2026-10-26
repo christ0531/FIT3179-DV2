@@ -12,90 +12,232 @@
     "offset": 12
   },
 
-  "data": {
-    "url": "data/hobart_trails.json",
-    "format": {
-      "type": "topojson",
-      "feature": "hobart_trails"
-    }
+  "projection": {
+    "type": "mercator",
+    "center": [147.25, -42.89],
+    "scale": 25000
   },
 
-  "transform": [
+  "layer": [
     {
-      "filter": "datum.properties.Walk == 'Y'"
+      "data": {
+        "url": "data/australia_states.json",
+        "format": {
+          "type": "topojson",
+          "feature": "STE_2026_AUST_GDA2020"
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.properties.STE_NAME26 == 'Tasmania'"
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eef3f0",
+        "stroke": "#aab8b1",
+        "strokeWidth": 1
+      }
     },
+
     {
-      "filter": "datum.properties.Walk_Grade != null && datum.properties.Walk_Grade != 'NA'"
+      "data": {
+        "url": "data/hobart_trails.json",
+        "format": {
+          "type": "topojson",
+          "feature": "hobart_trails"
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.properties.Walk == 'Y'"
+        },
+        {
+          "filter": "datum.properties.Walk_Grade != null && datum.properties.Walk_Grade != 'NA'"
+        }
+      ],
+
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "strokeWidth": 2
+      },
+
+      "encoding": {
+        "stroke": {
+          "field": "properties.Walk_Grade",
+          "type": "ordinal",
+          "title": "Walking Grade",
+
+          "scale": {
+            "domain": ["1", "2", "3", "4", "5"],
+            "range": [
+              "#c6dbef",
+              "#9ecae1",
+              "#6baed6",
+              "#3182bd",
+              "#08519c"
+            ]
+          },
+
+          "legend": {
+            "orient": "right",
+            "title": "Walking Grade",
+            "labelExpr": "datum.label == '1' ? 'Grade 1 — Easy' : datum.label == '2' ? 'Grade 2' : datum.label == '3' ? 'Grade 3 — Moderate' : datum.label == '4' ? 'Grade 4' : 'Grade 5 — Hardest'",
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "symbolStrokeWidth": 4
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "properties.Name",
+            "type": "nominal",
+            "title": "Trail"
+          },
+          {
+            "field": "properties.Reserve",
+            "type": "nominal",
+            "title": "Reserve"
+          },
+          {
+            "field": "properties.Walk_Grade",
+            "type": "ordinal",
+            "title": "Walking Grade"
+          },
+          {
+            "field": "properties.Status",
+            "type": "nominal",
+            "title": "Status"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Hobart",
+            "longitude": 147.3257,
+            "latitude": -42.8821
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 55,
+        "color": "#263b33",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Hobart",
+            "longitude": 147.3257,
+            "latitude": -42.8821
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "align": "left",
+        "dx": 8,
+        "dy": -6,
+        "color": "#263b33"
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Wellington Park",
+            "longitude": 147.18,
+            "latitude": -42.90
+          },
+          {
+            "name": "Queens Domain",
+            "longitude": 147.31,
+            "latitude": -42.86
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 10,
+        "fontStyle": "italic",
+        "color": "#5f6f67"
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "name"
+        }
+      }
     }
   ],
 
-  "projection": {
-    "type": "mercator"
-  },
-
-  "mark": {
-    "type": "geoshape",
-    "fill": null,
-    "strokeWidth": 1.8
-  },
-
-  "encoding": {
-    "stroke": {
-      "field": "properties.Walk_Grade",
-      "type": "ordinal",
-      "title": "Walking Grade",
-      "scale": {
-        "domain": ["1", "2", "3", "4", "5"],
-        "range": [
-          "#deebf7",
-          "#9ecae1",
-          "#6baed6",
-          "#3182bd",
-          "#08519c"
-        ]
-      },
-      "legend": {
-        "orient": "right",
-        "title": "Walking Grade",
-        "labelExpr": "datum.label == '1' ? 'Grade 1 — Easy' : datum.label == '2' ? 'Grade 2' : datum.label == '3' ? 'Grade 3 — Moderate' : datum.label == '4' ? 'Grade 4' : 'Grade 5 — Hardest'",
-        "labelFontSize": 12,
-        "titleFontSize": 13,
-        "symbolStrokeWidth": 4
-      }
-    },
-
-    "tooltip": [
-      {
-        "field": "properties.Name",
-        "type": "nominal",
-        "title": "Trail"
-      },
-      {
-        "field": "properties.Reserve",
-        "type": "nominal",
-        "title": "Reserve"
-      },
-      {
-        "field": "properties.Walk_Grade",
-        "type": "ordinal",
-        "title": "Walking Grade"
-      },
-      {
-        "field": "properties.Status",
-        "type": "nominal",
-        "title": "Status"
-      }
-    ]
-  },
-
   "config": {
     "background": "white",
+
     "view": {
       "stroke": null
     },
+
     "title": {
       "font": "Georgia"
     },
+
     "legend": {
       "labelFont": "Arial",
       "titleFont": "Arial"
